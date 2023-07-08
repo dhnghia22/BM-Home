@@ -1,0 +1,8 @@
+{
+    "home_screen": {
+        "search_placeholder": "Search for a restaurant or menu"
+    },
+    "error": {
+        "something_went_wrong": "Something went wrong, please try again!"
+    }
+}

@@ -1,0 +1,65 @@
+{
+  "extends": [
+    "tslint-config-airbnb",
+    "tslint-react-hooks"
+  ],
+  "rules": {
+    "react-hooks-nesting": "error",
+    "align": [
+      true,
+      "parameters",
+      "statements"
+    ],
+    "max-line-length": {
+      "options": [
+        140
+      ]
+    },
+    "new-parens": true,
+    "no-arg": true,
+    "no-bitwise": true,
+    "strict-type-predicates": false,
+    "no-conditional-assignment": true,
+    "no-consecutive-blank-lines": true,
+    "indent": [
+      true,
+      "spaces",
+      2
+    ],
+    "import-name": false,
+    "trailing-comma": [
+      true,
+      {
+        "multiline": "never",
+        "singleline": "never"
+      }
+    ],
+    "semicolon": [
+      true,
+      "never"
+    ],
+    "no-console": {
+      "severity": "warning",
+      "options": [
+        "debug",
+        "info",
+        "log",
+        "time",
+        "timeEnd",
+        "trace"
+      ]
+    },
+    "variable-name": [
+      true,
+      "check-format",
+      "allow-pascal-case"
+    ]
+  },
+  "jsRules": {
+    "max-line-length": {
+      "options": [
+        120
+      ]
+    }
+  }
+}

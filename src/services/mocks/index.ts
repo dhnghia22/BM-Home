@@ -1,0 +1,1 @@
+export {default as _v3_views_home} from './_v3_views_home.json';

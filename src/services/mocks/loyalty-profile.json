@@ -1,0 +1,166 @@
+{
+    "createdAt": "2023-05-13T12:53:03.201Z",
+    "updatedAt": "2023-07-03T06:02:26.437Z",
+    "customerId": "eu-TvW1SQ",
+    "tierId": 1,
+    "tierName": "Foodie Baby",
+    "tierMetadata": {
+      "name": {
+        "en": "Foodie Baby",
+        "vi": "Mầm Non Sành Ăn"
+      },
+      "coinUrl": "https://static.baemin.vn/loyalty/assets/coin_icon.png",
+      "iconUrl": "https://static.baemin.vn/loyalty/assets/badges/badge-bronze.png",
+      "benefits": [
+        {
+          "text": {
+            "en": "Receive coins for each order",
+            "vi": "Nhận xu cho mỗi đơn hàng"
+          },
+          "available": true
+        },
+        {
+          "text": {
+            "en": "Exchange coins for discount at checkout page",
+            "vi": "Dùng xu để giảm giá trực tiếp cho đơn hàng khi thanh toán"
+          },
+          "available": true
+        },
+        {
+          "text": {
+            "en": "Get exclusive coupons for members in Gift hub",
+            "vi": "Đổi mã giảm giá đặc quyền của thành viên trong Kho quà tặng"
+          },
+          "available": false
+        },
+        {
+          "text": {
+            "en": "Fabulous badges and avatars",
+            "vi": "Huy hiệu và avatar độc lạ"
+          },
+          "available": false
+        },
+        {
+          "text": {
+            "en": "Participate in secret events for members",
+            "vi": "Tham gia sự kiện bí mật chỉ dành cho thành viên"
+          },
+          "available": false
+        },
+        {
+          "text": {
+            "en": "Receive coupons when you level up",
+            "vi": "Nhận mã giảm giá khi thăng hạng"
+          },
+          "available": false
+        },
+        {
+          "text": {
+            "en": "Get hottest deals for Foodie Professor only",
+            "vi": "Nhận mã giảm giá hot nhất dành riêng cho Giáo sư"
+          },
+          "available": false
+        }
+      ],
+      "shortName": {
+        "en": "Preschooler",
+        "vi": "Mầm Non"
+      },
+      "backgroundColor": "#FFE6D3",
+      "backgroundImageUrl": "https://static.baemin.vn/loyalty/assets/wallet-cards/wallet_card_bg_bronze.png",
+      "myPageBackgroundUrl": "https://static.baemin.vn/loyalty/assets/mypage_bg/mypage_card_bg_bronze.png",
+      "walletBackgroundImageUrl": "https://static.baemin.vn/loyalty/assets/wallet-bgs/wallet_bg_bronze.png",
+      "gifthubBackgroundImageUrl": "https://static.baemin.vn/loyalty/assets/gifthub-bgs/header_bronze.png"
+    },
+    "tierMinPoint": 0,
+    "nextTier": {
+      "createdAt": "2023-05-08T07:49:52.914Z",
+      "createdBy": null,
+      "updatedAt": "2023-05-08T07:49:52.914Z",
+      "updatedBy": null,
+      "id": 2,
+      "name": "Foodie Pupil",
+      "status": "active",
+      "loyaltyProgramId": 1,
+      "pointMultiplier": 1.1,
+      "minPoints": 300000,
+      "metadata": {
+        "name": {
+          "en": "Foodie Pupil",
+          "vi": "Học Sinh Sành Ăn"
+        },
+        "coinUrl": "https://static.baemin.vn/loyalty/assets/coin_icon.png",
+        "iconUrl": "https://static.baemin.vn/loyalty/assets/badges/badge-silver.png",
+        "benefits": [
+          {
+            "text": {
+              "en": "Receive 1,1 coins for each order",
+              "vi": "Nhân 1,1 lần số xu cho mỗi đơn hàng"
+            },
+            "available": true
+          },
+          {
+            "text": {
+              "en": "Exchange coins for discount at checkout page",
+              "vi": "Dùng xu để giảm giá trực tiếp cho đơn hàng khi thanh toán"
+            },
+            "available": true
+          },
+          {
+            "text": {
+              "en": "Get exclusive coupons for members in Gift hub",
+              "vi": "Đổi mã giảm giá đặc quyền của thành viên trong Kho quà tặng"
+            },
+            "available": true
+          },
+          {
+            "text": {
+              "en": "Fabulous badges and avatars",
+              "vi": "Huy hiệu và avatar độc lạ"
+            },
+            "available": true
+          },
+          {
+            "text": {
+              "en": "Participate in secret events for members",
+              "vi": "Tham gia sự kiện bí mật chỉ dành cho thành viên"
+            },
+            "available": true
+          },
+          {
+            "text": {
+              "en": "Receive coupons when you level up",
+              "vi": "Nhận mã giảm giá khi thăng hạng"
+            },
+            "available": false
+          },
+          {
+            "text": {
+              "en": "Get hottest deals for Foodie Professor only",
+              "vi": "Nhận mã giảm giá hot nhất dành riêng cho Giáo sư"
+            },
+            "available": false
+          }
+        ],
+        "shortName": {
+          "en": "Pupil",
+          "vi": "Học Sinh"
+        },
+        "backgroundColor": "#D6E2FA",
+        "popupDescription": {
+          "en": "Your journey has just begun. \n Keep going and you will become \n Foodie Graduate in no time!",
+          "vi": "Đường “ăn” học chỉ mới bắt đầu.\n Tiếp tục cố gắng để trở thành \nSinh viên Sành ăn nha!"
+        },
+        "backgroundImageUrl": "https://static.baemin.vn/loyalty/assets/wallet-cards/wallet_card_bg_silver.png",
+        "myPageBackgroundUrl": "https://static.baemin.vn/loyalty/assets/mypage_bg/mypage_card_bg_silver.png",
+        "walletBackgroundImageUrl": "https://static.baemin.vn/loyalty/assets/wallet-bgs/wallet_bg_silver.png",
+        "gifthubBackgroundImageUrl": "https://static.baemin.vn/loyalty/assets/gifthub-bgs/header_silver.png"
+      }
+    },
+    "totalAcummulatedPoints": 63000,
+    "totalPoints": 918,
+    "totalActivePoints": 918,
+    "totalExpiredPoints": 0,
+    "totalRedeemedPoints": 0,
+    "rerankedDate": "2023-09-30T17:00:00.000Z"
+  }
