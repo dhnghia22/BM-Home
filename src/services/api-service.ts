@@ -1,16 +1,16 @@
 import { ConfigUtil } from "@/configs"
-import { ApiClient, CustomAxiosRequestConfig } from "@/utils/api-client"
-import { AxiosResponse } from "axios"
+import { ApiClient } from "@/utils/api-client"
+import { AxiosRequestConfig, AxiosResponse } from "axios"
 import { get } from 'lodash'
 
 export interface IApiRequester {
   get<T>(
     url: string,
-    config?: CustomAxiosRequestConfig
+    config?: AxiosRequestConfig
   ): Promise<T>
   post<T>(
     url: string,
-    config?: CustomAxiosRequestConfig
+    config?: AxiosRequestConfig
   ): Promise<T>
 }
 
@@ -24,13 +24,13 @@ export class ApiClientService implements IApiRequester {
 
   get<T>(
     url: string,
-    config?: CustomAxiosRequestConfig
+    config?: AxiosRequestConfig
   ): Promise<T> {
     return this.apiClient.get(url, config)
   }
   post<T>(
     url: string,
-    config?: CustomAxiosRequestConfig
+    config?: AxiosRequestConfig
   ): Promise<T> {
     return this.apiClient.post(url, config)
   }
@@ -39,7 +39,7 @@ export class ApiClientService implements IApiRequester {
 export class ApiClientMockService implements IApiRequester {
   get<T>(
     url: string,
-    config?: CustomAxiosRequestConfig
+    config?: AxiosRequestConfig
   ): Promise<T> {
     return new Promise((resolve) => {
       resolve
@@ -49,7 +49,6 @@ export class ApiClientMockService implements IApiRequester {
         if (!!get(config, 'params.page')) {
           mockFileName = mockFileName + `_page_${get(config, 'params.page')}`
         }
-        console.log('Load mock from: ', mockFileName)
         const response: AxiosResponse<T> = {
           data: json[mockFileName],
           status: 200,
@@ -64,7 +63,7 @@ export class ApiClientMockService implements IApiRequester {
 
   post<T>(
     url: string,
-    config?: CustomAxiosRequestConfig
+    config?: AxiosRequestConfig
   ): Promise<T> {
     return new Promise((resolve) => {
       resolve
@@ -85,7 +84,6 @@ export class ApiClientMockService implements IApiRequester {
 }
 
 function createApiClientInstance(environment: string): IApiRequester {
-  console.log('createApiClientInstance: ', environment)
   if (environment === 'dev') {
     return new ApiClientMockService()
   } else if (environment === 'prod') {

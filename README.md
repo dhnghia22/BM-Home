@@ -1,18 +1,11 @@
-### Goal ###
-Create the React-native application that meets requirements.
+## BEAMIN HOME SCREEN ##
 
-### Requirements ###
-1. Accurately Apply a given design (required)
-2. Handle data accurately
-* handle data with redux 
-* handle side effect with redux-saga 
-3. write code with typescript (optional)
-4. Write clean code (required)
+### Feature ###
+1. Support light/dark mode (check on video folder)
+2. Support multi language (en/vi)
 
-### Procedure ###
+### RUN ###
 1. `yarn install` & `pod install`
-2. `yarn run android` or run on XCode
-3. perform tasks to meet requirements
-4. compress the top folder and submit it
+2. `yarn run ios:dev` or `yarn start:dev` to run mocking env
+3. `yarn run ios:prod` or `yarn start:prod` to run prod env (request to api.beamin.vn)
 
-*if you have any question, please don't be hesitate to contact us.*

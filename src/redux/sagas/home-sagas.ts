@@ -20,7 +20,6 @@ import { ActionType } from '@/interface/action-type'
 // name=
 
 function* fetchData(action: ActionType) {
-  console.log(action)
   yield get(action.payload, 'isRefresh') == true ? put(setRefreshing()) : put(setLoading())
   try {
     const params: IGetHomeParam = {
@@ -31,7 +30,6 @@ function* fetchData(action: ActionType) {
     const result = yield call(HomeApiServices.getHomeData, params)
     yield put(setHomData(result))
   } catch (e) {
-    console.log("error: ", e)
     yield put(setError(translate('error.something_went_wrong')))
   }
 }

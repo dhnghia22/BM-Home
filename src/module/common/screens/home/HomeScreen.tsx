@@ -120,7 +120,6 @@ const HomeScreen: React.FC = () => {
         const feeds = get(section, 'data') || []
         return feeds.length > 0 ? <HomeFoodFeedHeader /> : null
       case SectionType.promotion:
-        console.log(section)
         const coupon = get(section, 'coupon')
         return !!coupon ? <HomeCoupon coupon={coupon} /> : null
       case SectionType.reorderSection:

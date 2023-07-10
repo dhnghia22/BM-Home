@@ -74,7 +74,7 @@ const mapMerchants = (items: any[], data: any): any[] => {
   return items
 }
 
-const mapToModel = (type: string, data?: any): any => {
+export const mapToModel = (type: string, data?: any): any => {
   if (data == null) {
     return null
   }
