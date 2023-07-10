@@ -11,6 +11,7 @@ import { fontSize } from '@/constants/font-size'
 import useColors from '@/hooks/use-colors'
 import { translate } from '@/i18n/translate'
 import { Merchant } from '@/models/home/merchant'
+import { AppRoutes } from '@/routes/app-routes'
 import { Time } from '@/utils/time'
 import React, { useMemo } from 'react'
 import { FlatList, StyleSheet, View, ViewStyle } from 'react-native'
@@ -64,8 +65,11 @@ const ReorderItem: React.FC<IReorderItem> = React.memo(({ order, styles }) => {
   const name = (isPartner ? '    ' : '') + (order.name || '')
   const provideCoupon = order.provideCoupon
   const colors = useColors()
+  const openScreen = () => {
+    AppRoutes.openDummyScreen()
+  }
   return (
-    <BMTouchableOpacity style={styles.itemContainer}>
+    <BMTouchableOpacity style={styles.itemContainer} onPress={openScreen}>
       <Row>
         <BMImageView url={order.imageUrl} style={styles.imageOrder} />
         <FlexView>

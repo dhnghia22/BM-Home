@@ -9,6 +9,7 @@ import { commonStyles } from '@/constants/common-style'
 import { fontSize } from '@/constants/font-size'
 import useColors from '@/hooks/use-colors'
 import { Merchant, Rating } from '@/models/home/merchant'
+import { AppRoutes } from '@/routes/app-routes'
 
 import React, { useMemo } from 'react'
 import { StyleSheet, View } from 'react-native'
@@ -24,8 +25,12 @@ const MerchantItem: React.FC<IMerchant> = React.memo(({ merchant }) => {
   const isPartner = merchant.isPartner == true
   const merchantName = (isPartner ? '     ' : '') + (merchant.name || '')
 
+  const openScreen = () => {
+    AppRoutes.openDummyScreen()
+  }
+
   return (
-    <BMTouchableOpacity style={styles.container}>
+    <BMTouchableOpacity style={styles.container} onPress={openScreen}>
       <BMImageView style={styles.image} url={merchant.thumbnailImageUrl} />
       <Row style={commonStyles.marginBottom8}>
         <View>

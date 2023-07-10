@@ -15,6 +15,7 @@ import { EdgeInsets, useSafeArea } from 'react-native-safe-area-context'
 import BMImageView from '@/components/image/BMImageView'
 import SubService from '@/models/home/sub-service'
 import IconService from '@/models/home/icon'
+import { AppRoutes } from '@/routes/app-routes'
 
 interface HomeIconsServiceProps {
   style?: ViewStyle
@@ -54,8 +55,11 @@ interface ItemProps {
 }
 
 const IconItem: React.FC<ItemProps> = React.memo(({ service }) => {
+  const openScreen = () => {
+    AppRoutes.openDummyScreen()
+  }
   return (
-    <BMTouchableOpacity style={itemStyles.imageContainer}>
+    <BMTouchableOpacity style={itemStyles.imageContainer} onPress={openScreen}>
         <BMImageView style={itemStyles.image} url={service.imageUrl} resizeMode="contain" />
     </BMTouchableOpacity>
   )

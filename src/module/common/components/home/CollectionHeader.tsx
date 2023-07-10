@@ -10,6 +10,7 @@ import { commonStyles } from '@/constants/common-style'
 import { fontSize } from '@/constants/font-size'
 import useColors from '@/hooks/use-colors'
 import { CollectionItem } from '@/models/home/collection'
+import { Time } from '@/utils/time'
 import React, { useMemo } from 'react'
 import { Image, StyleSheet, View, ViewStyle } from 'react-native'
 
@@ -41,11 +42,13 @@ const CollectionHeaderFlashSaleMerchant: React.FC<ICollectionHeaderMerchant> =
   React.memo(({ style, collection }) => {
     const colors = useColors()
     const styles = useMemo(() => createStyle(colors), [colors])
+
+
     return (
       <View style={styles.container}>
         <Row>
           <Image source={FlashSaleImage} style={styles.imageFlashSale} />
-          <FlashSaleCountDown expiredTime={collection.item.expiredAt} />
+          <FlashSaleCountDown expiredTime={Time.convertMinutesToDate(60 * 23)} />
         </Row>
         <RobotoBoldText
           fontStyle={fontSize.title2}

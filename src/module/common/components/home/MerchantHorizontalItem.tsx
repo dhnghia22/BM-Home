@@ -15,6 +15,7 @@ import React, { useMemo } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { MerchantItemRating } from './MerchantItem'
 import { convertMetersToKilometers } from '@/utils/number'
+import { AppRoutes } from '@/routes/app-routes'
 
 interface IMerchant {
   merchant: Merchant
@@ -27,10 +28,14 @@ const MerchantHorizontalItem: React.FC<IMerchant> = React.memo(
 
     const isPartner = merchant.isPartner == true
     const merchantName = (isPartner ? '     ' : '') + (merchant.name || '')
+
+    const openScreen = () => {
+      AppRoutes.openDummyScreen()
+    }
     
 
     return (
-      <BMTouchableOpacity style={styles.container}>
+      <BMTouchableOpacity style={styles.container} onPress={openScreen}>
         <Row>
           <BMImageView style={styles.image} url={merchant.thumbnailImageUrl} />
           <FlexView>

@@ -14,6 +14,7 @@ import {
 import { EdgeInsets, useSafeArea } from 'react-native-safe-area-context'
 import BMImageView from '@/components/image/BMImageView'
 import SubService from '@/models/home/sub-service'
+import { AppRoutes } from '@/routes/app-routes'
 
 interface HomeSubServiceProps {
   style?: ViewStyle
@@ -30,7 +31,7 @@ const HomeSubService: React.FC<HomeSubServiceProps> = React.memo(
       padding
     ])
 
-    console.log(services)
+
 
     return (
       <View style={styles.container}>
@@ -63,8 +64,12 @@ const ServiceItem: React.FC<ItemProps> = React.memo(({ service }) => {
     })
   }, [service.imageUrl])
 
+  const openScreen = () => {
+    AppRoutes.openDummyScreen()
+  }
+
   return (
-    <BMTouchableOpacity style={itemStyles.imageContainer}>
+    <BMTouchableOpacity style={itemStyles.imageContainer} onPress={openScreen}>
       <View style={[size, itemStyles.shadow]}>
         <BMImageView style={[size, itemStyles.shadow]} url={service.imageUrl} />
       </View>

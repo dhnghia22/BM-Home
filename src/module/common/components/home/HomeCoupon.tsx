@@ -13,6 +13,7 @@ import React, { useMemo } from 'react'
 import { StyleSheet, View } from 'react-native'
 import HomeUserMember from './HomeUserMember'
 import ArrowRightSvg from '@/assets/svg/ArrowRightSvg'
+import { AppRoutes } from '@/routes/app-routes'
 
 interface IHomeCoupon {
   coupon: Coupon
@@ -21,11 +22,13 @@ interface IHomeCoupon {
 const HomeCoupon: React.FC<IHomeCoupon> = React.memo(({ coupon }) => {
   const colors = useColors()
   const styles = useMemo(() => createStyle(colors), [colors])
-
+  const openScreen = () => {
+    AppRoutes.openDummyScreen()
+  }
   return (
     <>
     <View style={styles.container}>
-      <BMTouchableOpacity style={styles.contentContainer}>
+      <BMTouchableOpacity style={styles.contentContainer} onPress={openScreen}>
         <View style={[commonStyles.center, styles.icon]}>
           <CouponIcon />
         </View>

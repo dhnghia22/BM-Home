@@ -1,7 +1,8 @@
+import { ConfigUtil } from '@/configs'
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { get } from 'lodash'
 
-interface CustomAxiosRequestConfig extends AxiosRequestConfig {
+export interface CustomAxiosRequestConfig extends AxiosRequestConfig {
   __isRetryRequest?: boolean
 }
 
@@ -21,6 +22,9 @@ export class ApiClient {
     this.instance.interceptors.request.use(
       (config: CustomAxiosRequestConfig) => {
         // Add custom logic for request interception
+        config.headers = {
+          'User-Agent': `BAEMIN/${new Date().getTime()} CFNetwork/1399 Darwin/22.1.0`
+        }
         return config
       },
       (error) => Promise.reject(error)
@@ -88,9 +92,12 @@ export class ApiClient {
   ): Promise<T> {
     return new Promise(async (resolve, reject) => {
       try {
+        console.log('start')
         const res = await this.instance.get<T>(url, config);
+        console.log('res')
         resolve(res.data);
       } catch (e) {
+        console.log(e)
         reject(e);
       }
     })
@@ -112,102 +119,4 @@ export class ApiClient {
   }
 
   // Add other HTTP methods as needed (e.g., put, delete, etc.)
-}
-
-const client = new ApiClient('https://api.baemin.vn')
-
-export interface IApiRequester {
-  get<T>(
-    url: string,
-    config?: CustomAxiosRequestConfig
-  ): Promise<T>
-  post<T>(
-    url: string,
-    config?: CustomAxiosRequestConfig
-  ): Promise<T>
-}
-
-export class ApiClientService implements IApiRequester {
-  get<T>(
-    url: string,
-    config?: CustomAxiosRequestConfig
-  ): Promise<T> {
-    return client.get(url, config)
-  }
-  post<T>(
-    url: string,
-    config?: CustomAxiosRequestConfig
-  ): Promise<T> {
-    return client.post(url, config)
-  }
-}
-
-export class ApiClientMockService implements IApiRequester {
-  get<T>(
-    url: string,
-    config?: CustomAxiosRequestConfig
-  ): Promise<T> {
-    return new Promise((resolve) => {
-      resolve
-      setTimeout(() => {
-        let mockFileName = url.replace(/\//g, '_')
-        const json = require('@/services/mocks/index')
-        if (!!get(config, 'params.page')) {
-          mockFileName = mockFileName + `_page_${get(config, 'params.page')}`
-        }
-        console.log('Load mock from: ', mockFileName)
-        const response: AxiosResponse<T> = {
-          data: json[mockFileName],
-          status: 200,
-          statusText: 'OK',
-          headers: {},
-          config: {}
-        }
-        resolve(response.data)
-      }, Math.floor(Math.random() * (1000 - 250 + 1)) + 250)
-    })
-  }
-
-  post<T>(
-    url: string,
-    config?: CustomAxiosRequestConfig
-  ): Promise<T> {
-    return new Promise((resolve) => {
-      resolve
-      setTimeout(() => {
-        const mockFileName = url.replace(/\//g, '_')
-        const json = require('@/services/mocks/index')
-        const response: AxiosResponse<T> = {
-          data: json[mockFileName],
-          status: 200,
-          statusText: 'OK',
-          headers: {},
-          config: {}
-        }
-        resolve(response.data)
-      }, Math.floor(Math.random() * (1000 - 250 + 1)) + 250)
-    })
-  }
-}
-
-function createApiClientInstance(environment: string): IApiRequester {
-  if (environment === 'dev') {
-    return new ApiClientMockService()
-  } else if (environment === 'prod') {
-    return new ApiClientService()
-  } else {
-    throw new Error(`Invalid environment: ${environment}`)
-  }
-}
-
-export class ApiService {
-  static instance: IApiRequester
-
-  static initService() {
-    this.instance = createApiClientInstance('dev')
-  }
-
-  static setService(instance: IApiRequester) {
-    this.instance = instance
-  }
 }

@@ -21,7 +21,7 @@ import { ActionType } from '@/interface/action-type'
 
 function* fetchData(action: ActionType) {
   console.log(action)
-  yield get(action, 'payload.isRefresh') == true ? put(setRefreshing()) : put(setLoading())
+  yield get(action.payload, 'isRefresh') == true ? put(setRefreshing()) : put(setLoading())
   try {
     const params: IGetHomeParam = {
       coordinates: '106.68078570346272,10.81675548675936',
@@ -31,6 +31,7 @@ function* fetchData(action: ActionType) {
     const result = yield call(HomeApiServices.getHomeData, params)
     yield put(setHomData(result))
   } catch (e) {
+    console.log("error: ", e)
     yield put(setError(translate('error.something_went_wrong')))
   }
 }
@@ -40,7 +41,7 @@ function* fetchMoreData(action: ActionType) {
       coordinates: '106.68078570346272,10.81675548675936',
       features: 'iconrevamp',
       name: '',
-      page: get(action, 'payload.page')
+      page: get(action.payload, 'page')
     }
     const result = yield call(HomeApiServices.getHomeData, params)
     yield put(setHomMoreData(result))

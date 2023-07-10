@@ -1,5 +1,6 @@
 import { urlPath } from '@/constants/url-path'
-import { ApiService } from '@/utils/api-client'
+import { ApiService } from '../api-service'
+
 
 // coordinates=106.68078570346272,10.81675548675936
 // features=iconrevamp

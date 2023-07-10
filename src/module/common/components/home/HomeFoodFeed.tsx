@@ -12,6 +12,7 @@ import { fontSize } from '@/constants/font-size'
 import useColors from '@/hooks/use-colors'
 import { translate } from '@/i18n/translate'
 import { Articles, FoodFeed } from '@/models/home/food-feed'
+import { AppRoutes } from '@/routes/app-routes'
 import React, { useMemo } from 'react'
 import { FlatList, StyleSheet, Text, View, ViewStyle } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
@@ -78,11 +79,6 @@ const FoodFeedItem: React.FC<IHomeHomeFoodFeed> = React.memo(({ feed }) => {
       data={feed.articles ?? []}
       keyExtractor={(item, index) => `food-blog-view-${item.thumbnail}-${index}`}
       ListFooterComponentStyle={{ width: 100, height: 100 }}
-      ListFooterComponent={
-        <View style={{ width: 100, height: 100 }}>
-          <Text>Footer</Text>
-        </View>
-      }
       renderItem={({ item }) => {
         return <ArticleItem article={item} styles={styles} />
       }}
@@ -105,9 +101,12 @@ type ArticleStyle = {
 }
 
 const ArticleItem: React.FC<IArticle> = React.memo(({ article, styles }) => {
+  const openScreen = () => {
+    AppRoutes.openDummyScreen()
+  }
   return (
     <View style={styles.itemContainer}>
-      <BMTouchableOpacity style={styles.imageContainer}>
+      <BMTouchableOpacity style={styles.imageContainer} onPress={openScreen}>
         <BMImageView url={article.thumbnail} style={styles.imageBackground} />
         <LinearGradient
           colors={['#000000', 'rgba(0, 0, 0, 0)']}

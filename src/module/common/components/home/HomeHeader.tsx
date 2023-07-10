@@ -6,6 +6,7 @@ import { ColorPalette } from '@/constants/colors';
 import { commonStyles } from '@/constants/common-style';
 import { fontSize } from '@/constants/font-size';
 import useColors from '@/hooks/use-colors';
+import { AppRoutes } from '@/routes/app-routes';
 import React, { useMemo } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { EdgeInsets, useSafeArea } from 'react-native-safe-area-context';
@@ -15,6 +16,10 @@ const HomeHeader: React.FC = () => {
   const padding = useSafeArea();
   const styles = useMemo(() => createStyle(colors, padding), [colors, padding])
 
+  const openScreen = () => {
+    AppRoutes.openDummyScreen()
+  }
+
   return (
     <View style={[styles.container, styles.padding]}>
       <Row style={[commonStyles.padding_8_16]}>
@@ -22,10 +27,10 @@ const HomeHeader: React.FC = () => {
           <LocationFilled />
         </View>
         <RobotoBoldText style={commonStyles.flex1} fontStyle={fontSize.title2}>Friendship Tower</RobotoBoldText>
-        <BMTouchableOpacity style={[styles.icon, styles.marginLeft8]}>
+        <BMTouchableOpacity style={[styles.icon, styles.marginLeft8]} onPress={openScreen}>
           <Inbox />
         </BMTouchableOpacity>
-        <BMTouchableOpacity  style={[styles.icon, styles.marginLeft8]}>
+        <BMTouchableOpacity  style={[styles.icon, styles.marginLeft8]} onPress={openScreen}>
           <Menu />
         </BMTouchableOpacity>
       </Row>

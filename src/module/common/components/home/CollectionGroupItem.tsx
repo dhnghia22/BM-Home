@@ -5,6 +5,7 @@ import { ColorPalette } from '@/constants/colors'
 import { fontSize } from '@/constants/font-size'
 import useColors from '@/hooks/use-colors'
 import Banner from '@/models/home/banner'
+import { AppRoutes } from '@/routes/app-routes'
 
 import React, { useMemo } from 'react'
 import { StyleSheet } from 'react-native'
@@ -17,9 +18,11 @@ const CollectionGroupItem: React.FC<ICollectionGroup> = React.memo(
   ({ item }) => {
     const colors = useColors()
     const styles = useMemo(() => createStyle(colors), [colors])
-
+    const openScreen = () => {
+      AppRoutes.openDummyScreen()
+    }
     return (
-      <BMTouchableOpacity style={styles.container}>
+      <BMTouchableOpacity style={styles.container} onPress={openScreen}>
         <BMImageView style={styles.image} url={item.imageUrl} />
         <RobotoMediumText fontStyle={fontSize.title4}>
           {item.name}

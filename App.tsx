@@ -1,10 +1,11 @@
-import React, { FC, useEffect, useState } from 'react'
-import { View, Appearance } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { Appearance } from 'react-native'
 import { Provider } from 'react-redux';
 import store from '@/redux/store/store';
-import { ApiService } from '@/utils/api-client';
+
 import { ThemeContext } from '@/context/theme-context';
 import AppNavigation from '@/navigation/navigation';
+import { ApiService } from '@/services/api-service';
 
 ApiService.initService();
 
@@ -19,11 +20,6 @@ const App: () => React.ReactNode = () => {
       newTheme = { mode }
     }
     setTheme(newTheme);
-  }
-
-
-  const initService = (): void => {
-    ApiService.initService();
   }
 
   useEffect(() => {

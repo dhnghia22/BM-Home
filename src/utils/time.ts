@@ -13,4 +13,11 @@ export class Time {
       .toString()
       .padStart(2, '0')}`;
   }
+
+  static convertMinutesToDate(minutes: number): string {
+    const currentDate = new Date();
+    const targetDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 0, minutes);
+    const formattedDate = targetDate.toISOString();
+    return formattedDate;
+  }
 }

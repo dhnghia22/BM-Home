@@ -15,6 +15,7 @@ import Carousel from 'react-native-snap-carousel'
 
 import { EdgeInsets, useSafeArea } from 'react-native-safe-area-context'
 import BMImageView from '@/components/image/BMImageView'
+import { AppRoutes } from '@/routes/app-routes'
 
 const { width: screenWidth } = Dimensions.get('window')
 
@@ -23,10 +24,10 @@ interface HomeBannerProps {
   banners: Banner[]
 }
 
-const HomeSubBanner: React.FC<HomeBannerProps> = ({ style, banners }) => {
+const HomeBanner: React.FC<HomeBannerProps> = ({ style, banners }) => {
   const colors = useColors()
   const padding = useSafeArea()
-  const height = ((Metrics.screenWidth - 16) / 343) * 72
+  const height = ((Metrics.screenWidth - 16) / 343) * 170
   const styles = useMemo(() => createStyle(colors, padding), [colors, padding])
 
   return (
@@ -48,7 +49,7 @@ const HomeSubBanner: React.FC<HomeBannerProps> = ({ style, banners }) => {
         renderItem={({ item }) => {
           return <BannerItem banner={item} />
         }}
-        keyExtractor={(item, index) => `sub-banner-${item?.id}_${index}`}
+        keyExtractor={(item, index) => `${item?.id}_${index}`}
       />
     </View>
   )
@@ -60,8 +61,13 @@ interface BannerItemProps {
 }
 
 const BannerItem: React.FC<BannerItemProps> = React.memo(({ banner }) => {
+
+  const openScreen = () => {
+    AppRoutes.open(banner.type, banner.link)
+  }
+
   return (
-    <BMTouchableOpacity style={itemStyles.imageContainer}>
+    <BMTouchableOpacity style={itemStyles.imageContainer} onPress={openScreen}>
       <BMImageView
         style={commonStyles.flex1}
         url={banner.imageUrl}
@@ -74,20 +80,20 @@ const itemStyles = StyleSheet.create({
   imageContainer: {
     flex: 1,
     marginHorizontal: 4,
-    marginVertical: 12,
+    marginVertical: 8,
     borderRadius: 8,
     overflow: 'hidden',
   }
 })
 
 const createStyle = (colors: ColorPalette, padding: EdgeInsets) => {
-  const height = ((Metrics.screenWidth - 16) / 343) * 72
+  const height = ((Metrics.screenWidth - 16) / 343) * 170
   return StyleSheet.create({
     container: {
       backgroundColor: colors.background,
-      height: height + 24
+      height: height + 16
     }
   })
 }
 
-export default HomeSubBanner
+export default HomeBanner

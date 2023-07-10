@@ -6,6 +6,7 @@ import { ColorPalette } from '@/constants/colors'
 import { fontSize } from '@/constants/font-size'
 import useColors from '@/hooks/use-colors'
 import { translate } from '@/i18n/translate'
+import { AppRoutes } from '@/routes/app-routes'
 import React, { useEffect, useMemo, useRef } from 'react'
 import { View, StyleSheet, Animated } from 'react-native'
 import { EdgeInsets, useSafeArea } from 'react-native-safe-area-context'
@@ -16,9 +17,13 @@ const HomeSearch = () => {
   const padding = useSafeArea()
   const styles = useMemo(() => createStyle(colors, padding), [colors, padding])
 
+  const openScreen = () => {
+    AppRoutes.openDummyScreen()
+  }
+
   return (
     <View style={styles.container}>
-      <BMTouchableOpacity style={styles.button}>
+      <BMTouchableOpacity style={styles.button} onPress={openScreen}>
         <Row style={styles.itemCenter}>
           <View style={styles.icon}>
             <HomeSearchIcon />

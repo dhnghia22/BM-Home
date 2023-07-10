@@ -3,11 +3,15 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "ios": "export ENVIRONMENT=dev && sh ./bin/config.sh && react-native run-ios",
     "android": "react-native run-android",
-    "ios": "react-native run-ios",
-    "start": "react-native start",
+    "start": "export ENVIRONMENT=dev && sh ./bin/config.sh && react-native start",
+    "start:dev": "export ENVIRONMENT=dev && sh ./bin/config.sh && react-native start",
+    "start:prod": "export ENVIRONMENT=prod && sh ./bin/config.sh && react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "ios:dev": "export ENVIRONMENT=dev && sh ./bin/config.sh && react-native run-ios",
+    "ios:prod": "export ENVIRONMENT=prod && sh ./bin/config.sh && react-native run-ios"
   },
   "husky": {
     "hooks": {
@@ -39,6 +43,7 @@
     "react-native-snap-carousel": "^3.9.1",
     "react-native-status-bar-height": "^2.6.0",
     "react-native-svg": "^12.1.0",
+    "react-native-webview": "^13.2.2",
     "react-redux": "^7.2.2",
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.1.3",

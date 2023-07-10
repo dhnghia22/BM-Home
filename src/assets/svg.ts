@@ -9,3 +9,4 @@ export {default as ArrowRightIcon} from './svg/arrow_right.svg';
 export {default as CouponIcon} from './svg/coupon.svg';
 export {default as ReorderPartnerIcon} from './svg/reorder_partner.svg';
 export {default as TwoDotIcon} from './svg/two_dot.svg';
+export {default as BackIcon} from './svg/back_icon.svg';

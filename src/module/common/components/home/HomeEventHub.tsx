@@ -5,6 +5,7 @@ import { ColorPalette } from '@/constants/colors'
 import { fontSize } from '@/constants/font-size'
 import useColors from '@/hooks/use-colors'
 import { EventHub } from '@/models/home/eventhub'
+import { AppRoutes } from '@/routes/app-routes'
 import React, { useMemo } from 'react'
 import { ImageBackground, StyleSheet, View } from 'react-native'
 
@@ -15,9 +16,11 @@ interface IHomeEventBanner {
 const HomeEventHub: React.FC<IHomeEventBanner> = React.memo(({ eventHub }) => {
   const colors = useColors()
   const styles = useMemo(() => createStyle(colors), [colors])
-
+  const openScreen = () => {
+    AppRoutes.openDummyScreen()
+  }
   return <View style={styles.container}>
-    <BMTouchableOpacity style={styles.imageContainer}>
+    <BMTouchableOpacity style={styles.imageContainer} onPress={openScreen}>
       <ImageBackground style={styles.backgroundImage} source={EventBannerImage}>
         <RobotoBoldText fontStyle={fontSize.title2} color={colors.white}>{eventHub.title}</RobotoBoldText>
         <RobotoRegularText fontStyle={fontSize.body1} color={colors.white}>{eventHub.description}</RobotoRegularText>

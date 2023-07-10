@@ -1,3 +1,5 @@
+import { Time } from "../time";
+
 describe('Time', () => {
   describe('convertTime', () => {
     it('should convert time string to the desired format', () => {

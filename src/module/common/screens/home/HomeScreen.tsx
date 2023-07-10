@@ -1,13 +1,12 @@
 import React, { useEffect, useMemo, useRef } from 'react'
 import {
   ActivityIndicator,
+  Alert,
   Animated,
   RefreshControl,
-  SectionList,
   View
 } from 'react-native'
-import HomeHeader from '@/module/common/screens/home/components/HomeHeader'
-import HomeSearch from './components/HomeSearch'
+import HomeHeader from '@/module/common/components/home/HomeHeader'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchHomeData, fetchMoreHomeData } from '@/redux/actions/home-actions'
 import { RootState } from '@/redux/reducers'
@@ -17,29 +16,30 @@ import { API_STATUS } from '@/constants/status'
 import Loading from '@/components/loading/Loading'
 import { section as SectionType } from '@/redux/reducers/home-reducer'
 import { get } from 'lodash'
-import Banner from '@/models/home/banner'
-import HomeBanner from '@/module/common/screens/home/components/HomeBanner'
-import SubService from '@/models/home/sub-service'
-import HomeSubService from '@/module/common/screens/home/components/HomeSubService'
-import IconService from '@/models/home/icon'
-import HomeIconsService from '@/module/common/screens/home/components/HomeIcons'
-import HomeSubBanner from '@/module/common/screens/home/components/HomeSubBanner'
+import HomeBanner from '@/module/common/components/home/HomeBanner'
+import HomeSubService from '@/module/common/components/home/HomeSubService'
+import HomeIconsService from '@/module/common/components/home/HomeIcons'
+import HomeSubBanner from '@/module/common/components/home/HomeSubBanner'
 import { commonStyles } from '@/constants/common-style'
-import HomeCollection from '@/module/common/screens/home/components/HomeCollection'
+import HomeCollection from '@/module/common/components/home/HomeCollection'
 import { CollectionItem } from '@/models/home/collection'
-import HomeEventHub from '@/module/common/screens/home/components/HomeEventHub'
+import HomeEventHub from '@/module/common/components/home/HomeEventHub'
 import {
   FoodFeedItem,
   HomeFoodFeedHeader
-} from '@/module/common/screens/home/components/HomeFoodFeed'
-import HomeCoupon from '@/module/common/screens/home/components/HomeCoupon'
+} from '@/module/common/components/home/HomeFoodFeed'
+import HomeCoupon from '@/module/common/components/home/HomeCoupon'
 import { useSafeArea } from 'react-native-safe-area-context'
-import HomeReorder from '@/module/common/screens/home/components/HomeReorder'
-import HomeFavorite from '@/module/common/screens/home/components/HomeFavorite'
-import { HomeCommonHeader } from './components/CollectionHeader'
-import MerchantHorizontalItem from './components/MerchantHorizontalItem'
+import HomeReorder from '@/module/common/components/home/HomeReorder'
+import HomeFavorite from '@/module/common/components/home/HomeFavorite'
 import { translate } from '@/i18n/translate'
 import { Metrics } from '@/constants/metrics'
+import HomeSearch from '../../components/home/HomeSearch'
+import { HomeCommonHeader } from '../../components/home/CollectionHeader'
+import MerchantHorizontalItem from '../../components/home/MerchantHorizontalItem'
+
+import createStyles from './HomeScreen.styles'
+import useColors from '@/hooks/use-colors'
 
 const CONTAINER_HEIGHT = 44
 
@@ -48,11 +48,14 @@ const HomeScreen: React.FC = () => {
   const padding = useSafeArea()
   const [refreshing, setRefreshing] = React.useState(false)
   const state: HomeState = useSelector((state: RootState) => state.home)
-
   const scrollY = useRef(new Animated.Value(0)).current
   const offsetAnim = useRef(new Animated.Value(0)).current
   let scrollEndTimer = null
 
+
+  const colors = useColors()
+  const styles = useMemo(() => createStyles(colors), [colors])
+  
   useEffect(() => {
     dispatch(fetchHomeData())
     return () => {
@@ -61,8 +64,10 @@ const HomeScreen: React.FC = () => {
   }, [])
 
   useEffect(() => {
-    // console.log(state.data)
-  }, [state])
+    if (state.status == API_STATUS.ERROR && !!state.errorMessage) {
+      Alert.alert(state.errorMessage)
+    }
+  }, [state.status])
 
   useEffect(() => {
     updateRefreshing(state.status == API_STATUS.REFRESHING)
@@ -78,7 +83,7 @@ const HomeScreen: React.FC = () => {
       case SectionType.flashSaleSection:
       case SectionType.collectionSection:
         const collections = data as CollectionItem
-        return !!collections ? (
+        return !!collections && (collections.item.merchants || []).length > 0 ? (
           <HomeCollection collection={collections} />
         ) : null
       case SectionType.merchantSection:
@@ -115,6 +120,7 @@ const HomeScreen: React.FC = () => {
         const feeds = get(section, 'data') || []
         return feeds.length > 0 ? <HomeFoodFeedHeader /> : null
       case SectionType.promotion:
+        console.log(section)
         const coupon = get(section, 'coupon')
         return !!coupon ? <HomeCoupon coupon={coupon} /> : null
       case SectionType.reorderSection:
@@ -218,7 +224,7 @@ const HomeScreen: React.FC = () => {
   })
 
   return (
-    <>
+    <View style={styles.container}>
       <HomeHeader />
       <FlexView>
         <Animated.SectionList
@@ -254,7 +260,7 @@ const HomeScreen: React.FC = () => {
             }
             return (
               <View
-                style={{ width: '100%', height: 40, justifyContent: 'center' }}
+                style={styles.loadmore}
               >
                 <ActivityIndicator animating={true} size="small" />
               </View>
@@ -262,14 +268,10 @@ const HomeScreen: React.FC = () => {
           }}
         />
         <Animated.View
-          style={{
-            position: 'absolute',
-            top: 0,
-            right: 0,
-            left: 0,
+          style={[styles.headerSearch, {
             height: CONTAINER_HEIGHT,
             transform: [{ translateY: headerTranslate }]
-          }}
+          }]}
         >
           <HomeSearch />
         </Animated.View>
@@ -279,7 +281,7 @@ const HomeScreen: React.FC = () => {
           </View>
         )}
       </FlexView>
-    </>
+    </View>
   )
 }
 
