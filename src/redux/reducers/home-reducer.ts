@@ -1,15 +1,19 @@
 import { API_STATUS } from '@/constants/status'
 import { ActionType } from '@/interface/action-type'
 import {
+  HOME_FETCH_MORE_DATA,
+  HOME_FETCH_MORE_SUCCESS,
   HOME_FETCH_SUCCESS,
   HOME_SET_ERROR,
-  HOME_SET_LOADING
+  HOME_SET_LOADING,
+  HOME_SET_REFRESHING
 } from '../types/home-types'
 
 import { get, pick } from 'lodash'
 import { mapToBannerArray } from '@/models/home/banner'
 import { mapToSubServiceArray } from '@/models/home/sub-service'
 import { mapToIconServiceArray } from '@/models/home/icon'
+import { RootState } from '.'
 
 export const section = {
   bannerSection: 'bannerSection',
@@ -24,7 +28,8 @@ export const section = {
   collectionSection: 'collectionSection',
   reorderSection: 'reorderSection',
   favoriteSection: 'favoriteSection',
-  merchantSection: 'merchantSection'
+  merchantSection: 'merchantSection',
+  sectionOrdering: 'sectionOrdering'
 }
 
 export interface HomeState {
@@ -40,7 +45,7 @@ const homeInitialState: HomeState = {
 }
 
 const mapResponseToSection = (data: any): Array<any> => {
-  const sectionOrdering = get(data, 'sectionOrdering')
+  const sectionOrdering = get(data, section.sectionOrdering)
   const sectionOrders: string[] = Array.isArray(sectionOrdering)
     ? sectionOrdering.filter((item) => typeof item === 'string')
     : []
@@ -49,6 +54,24 @@ const mapResponseToSection = (data: any): Array<any> => {
       return mapToModel(e, get(data, `${e}`))
     })
     .filter((item) => item !== null)
+}
+
+const mapMerchants = (items: any[], data: any): any[] => {
+  const merchantSection = get(data, `${section.merchantSection}`)
+  const docs = get(merchantSection, 'docs') || []
+  if (Array.isArray(docs) && docs.length > 0) {
+    return items.map((e) => {
+      if (get(e, 'section') == section.merchantSection) {
+        return {
+          ...e,
+          ...pick(merchantSection, ['pages', 'page', 'limit', 'total']),
+          data: [...get(e, 'data'), ...docs]
+        }
+      }
+      return e
+    })
+  }
+  return items
 }
 
 const mapToModel = (type: string, data?: any): any => {
@@ -99,8 +122,8 @@ const mapToModel = (type: string, data?: any): any => {
     case section.foodFeedSection:
       return {
         section: type,
-        data: [],
-        feed: get(data, 'foodFeed')
+        data: [get(data, 'foodFeed')],
+        link: get(data, 'foodFeed.link')
       }
     case section.promotion:
       return {
@@ -144,6 +167,11 @@ function homeReducer(state = homeInitialState, action: ActionType) {
         ...state,
         status: API_STATUS.LOADING
       }
+    case HOME_SET_REFRESHING:
+      return {
+        ...state,
+        status: API_STATUS.REFRESHING
+      }
     case HOME_SET_ERROR:
       return {
         ...state,
@@ -157,6 +185,18 @@ function homeReducer(state = homeInitialState, action: ActionType) {
         status: API_STATUS.SUCCESS,
         errorMessage: null
       }
+    case HOME_FETCH_MORE_DATA:
+      return {
+        ...state,
+        status: API_STATUS.MORE_LOADING
+      }
+    case HOME_FETCH_MORE_SUCCESS:
+      return {
+        ...state,
+        status: API_STATUS.SUCCESS,
+        data: mapMerchants(state.data, action.payload)
+      }
+
     default:
       return state
   }

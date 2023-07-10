@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
+import { get } from 'lodash'
 
 interface CustomAxiosRequestConfig extends AxiosRequestConfig {
   __isRetryRequest?: boolean
@@ -149,8 +150,12 @@ export class ApiClientMockService implements IApiRequester {
     return new Promise((resolve) => {
       resolve
       setTimeout(() => {
-        const mockFileName = url.replace(/\//g, '_')
+        let mockFileName = url.replace(/\//g, '_')
         const json = require('@/services/mocks/index')
+        if (!!get(config, 'params.page')) {
+          mockFileName = mockFileName + `_page_${get(config, 'params.page')}`
+        }
+        console.log('Load mock from: ', mockFileName)
         const response: AxiosResponse<T> = {
           data: json[mockFileName],
           status: 200,

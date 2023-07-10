@@ -38,7 +38,8 @@ const HomeHeader: React.FC = () => {
 const createStyle = (colors: ColorPalette, padding: EdgeInsets) => {
   return StyleSheet.create({
     container: {
-      backgroundColor: colors.background
+      backgroundColor: colors.background,
+      zIndex: 700
     },
     padding: {
       paddingTop: padding.top,

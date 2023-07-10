@@ -30,8 +30,6 @@ const HomeIconsService: React.FC<HomeIconsServiceProps> = React.memo(
       padding
     ])
 
-    console.log(icons)
-
     return (
       <View style={styles.container}>
         <FlatList

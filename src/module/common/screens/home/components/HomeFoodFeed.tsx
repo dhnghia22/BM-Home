@@ -13,20 +13,14 @@ import useColors from '@/hooks/use-colors'
 import { translate } from '@/i18n/translate'
 import { Articles, FoodFeed } from '@/models/home/food-feed'
 import React, { useMemo } from 'react'
-import {
-  FlatList,
-  StyleSheet,
-  Text,
-  View,
-  ViewStyle
-} from 'react-native'
+import { FlatList, StyleSheet, Text, View, ViewStyle } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 
 interface IHomeHomeFoodFeed {
   feed: FoodFeed
 }
 
-const HomeFoodFeed: React.FC<IHomeHomeFoodFeed> = React.memo(({ feed }) => {
+const HomeFoodFeedHeader: React.FC = React.memo(() => {
   const colors = useColors()
   const styles = useMemo(() => createStyle(colors), [colors])
 
@@ -48,7 +42,7 @@ const HomeFoodFeed: React.FC<IHomeHomeFoodFeed> = React.memo(({ feed }) => {
         </BeaminBoldText>
         <ArrowRightIcon />
       </BMTouchableOpacity>
-      <FlatList
+      {/* <FlatList
         horizontal
         style={styles.flatList}
         showsHorizontalScrollIndicator={false}
@@ -65,8 +59,34 @@ const HomeFoodFeed: React.FC<IHomeHomeFoodFeed> = React.memo(({ feed }) => {
         renderItem={({ item }) => {
           return <ArticleItem article={item} styles={styles} />
         }}
-      />
+      /> */}
     </View>
+  )
+})
+
+const FoodFeedItem: React.FC<IHomeHomeFoodFeed> = React.memo(({ feed }) => {
+  const colors = useColors()
+  const styles = useMemo(() => createStyle(colors), [colors])
+
+  return (
+    <FlatList
+      horizontal
+      style={styles.flatList}
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={styles.flatListContainer}
+      ItemSeparatorComponent={() => <View style={styles.flatListSpace} />}
+      data={feed.articles ?? []}
+      keyExtractor={(item, index) => `food-blog-view-${item.thumbnail}-${index}`}
+      ListFooterComponentStyle={{ width: 100, height: 100 }}
+      ListFooterComponent={
+        <View style={{ width: 100, height: 100 }}>
+          <Text>Footer</Text>
+        </View>
+      }
+      renderItem={({ item }) => {
+        return <ArticleItem article={item} styles={styles} />
+      }}
+    />
   )
 })
 
@@ -174,4 +194,4 @@ const createStyle = (colors: ColorPalette) => {
   })
 }
 
-export default HomeFoodFeed
+export { HomeFoodFeedHeader, FoodFeedItem }

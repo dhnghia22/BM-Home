@@ -46,5 +46,12 @@ export const commonStyles = StyleSheet.create({
   },
   marginLeft8: {
     marginLeft: 8,
+  },
+  fit: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0
   }
 });

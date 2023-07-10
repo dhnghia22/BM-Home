@@ -18,8 +18,8 @@ interface ICollectionHeaderMerchant {
   collection: CollectionItem
 }
 
-const CollectionHeaderMerchant: React.FC<ICollectionHeaderMerchant> = React.memo(
-  ({ style, collection }) => {
+const CollectionHeaderMerchant: React.FC<ICollectionHeaderMerchant> =
+  React.memo(({ style, collection }) => {
     switch (collection.type) {
       case COLLECTION_LAYOUT.COLLECTION:
         switch (collection.item.type) {
@@ -35,16 +35,12 @@ const CollectionHeaderMerchant: React.FC<ICollectionHeaderMerchant> = React.memo
       default:
         return null
     }
-  }
-)
+  })
 
-const CollectionHeaderFlashSaleMerchant: React.FC<ICollectionHeaderMerchant> = React.memo(
-  ({ style, collection }) => {
+const CollectionHeaderFlashSaleMerchant: React.FC<ICollectionHeaderMerchant> =
+  React.memo(({ style, collection }) => {
     const colors = useColors()
     const styles = useMemo(() => createStyle(colors), [colors])
-
-    console.log(collection.item.expiredAt)
-
     return (
       <View style={styles.container}>
         <Row>
@@ -64,8 +60,7 @@ const CollectionHeaderFlashSaleMerchant: React.FC<ICollectionHeaderMerchant> = R
         />
       </View>
     )
-  }
-)
+  })
 
 const CollectionHeaderGroup: React.FC<ICollectionHeaderMerchant> = React.memo(
   ({ style, collection }) => {
@@ -81,8 +76,8 @@ const CollectionHeaderGroup: React.FC<ICollectionHeaderMerchant> = React.memo(
   }
 )
 
-const CollectionHeaderNormalMerchant: React.FC<ICollectionHeaderMerchant> = React.memo(
-  ({ style, collection }) => {
+const CollectionHeaderNormalMerchant: React.FC<ICollectionHeaderMerchant> =
+  React.memo(({ style, collection }) => {
     const colors = useColors()
     const styles = useMemo(() => createStyle(colors), [colors])
     return (
@@ -100,21 +95,20 @@ const CollectionHeaderNormalMerchant: React.FC<ICollectionHeaderMerchant> = Reac
         <ArrowRightSvg color={colors.gray500} />
       </BMTouchableOpacity>
     )
-  }
-)
+  })
 
-export const HomeCommonHeader: React.FC<({title: string})> = React.memo(
+export const HomeCommonHeader: React.FC<{ title: string }> = React.memo(
   ({ title }) => {
     const colors = useColors()
     const styles = useMemo(() => createStyle(colors), [colors])
     return (
       <>
-      <View style={styles.line} />
-      <View style={styles.containerGroup}>
-        <RobotoBoldText fontStyle={fontSize.title2} color={colors.gray950}>
-          {title}
-        </RobotoBoldText>
-      </View>
+        <View style={styles.line} />
+        <View style={styles.containerGroup}>
+          <RobotoBoldText fontStyle={fontSize.title2} color={colors.gray950}>
+            {title}
+          </RobotoBoldText>
+        </View>
       </>
     )
   }
@@ -133,7 +127,7 @@ const createStyle = (colors: ColorPalette) => {
     },
     imageFlashSale: {
       width: 98,
-      height: 22,
+      height: 22
     },
     imageFlashSaleGraphics: {
       position: 'absolute',
@@ -149,7 +143,7 @@ const createStyle = (colors: ColorPalette) => {
     },
     line: {
       backgroundColor: colors.gray100,
-      height: 8,
+      height: 8
     }
   })
 }

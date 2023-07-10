@@ -3,5 +3,6 @@ export enum API_STATUS {
     LOADING = "LOADING",
     SUCCESS = "SUCCESS",
     MORE_LOADING = "MORE_LOADING",
+    REFRESHING = "REFRESHING",
     ERROR = "ERROR",
   }
