@@ -6,6 +6,7 @@ interface Banner {
   imageUrl: string
   link: string
   id: string
+  name?: string
 }
 
 export function mapToBannerArray(data: any[]): Banner[] {

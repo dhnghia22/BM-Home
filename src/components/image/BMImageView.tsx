@@ -12,7 +12,7 @@ const BMImageView = (props: BMImageProps) => {
   return url || source ? (
     <FastImage
       source={source || { uri: url }}
-      defaultSource={defaultSource}
+      defaultSource={require('@/assets/images/placeholder.png')}
       resizeMode="cover"
       {...rest}
     />

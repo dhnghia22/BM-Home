@@ -6,7 +6,7 @@ import {
   HOME_SET_LOADING
 } from '../types/home-types'
 
-import { get } from 'lodash'
+import { get, pick } from 'lodash'
 import { mapToBannerArray } from '@/models/home/banner'
 import { mapToSubServiceArray } from '@/models/home/sub-service'
 import { mapToIconServiceArray } from '@/models/home/icon'
@@ -44,44 +44,93 @@ const mapResponseToSection = (data: any): Array<any> => {
   const sectionOrders: string[] = Array.isArray(sectionOrdering)
     ? sectionOrdering.filter((item) => typeof item === 'string')
     : []
-  return sectionOrders.map((e: string) => {
-    return mapToModel(e, get(data, `${e}`))
-  }).filter(item => item !== null);
+  return sectionOrders
+    .map((e: string) => {
+      return mapToModel(e, get(data, `${e}`))
+    })
+    .filter((item) => item !== null)
 }
 
 const mapToModel = (type: string, data?: any): any => {
   if (data == null) {
-    return null;
+    return null
   }
   switch (type) {
     case section.bannerSection:
       const banners = get(data, 'banners', [])
       return {
         section: type,
-        data: mapToBannerArray(banners)
+        data: [],
+        banners: mapToBannerArray(banners)
       }
     case section.subserviceSection:
       const subServices = get(data, 'subservices', [])
       return {
-        section: type, 
-        data: mapToSubServiceArray(subServices)
+        section: type,
+        data: [],
+        subservices: mapToSubServiceArray(subServices)
       }
     case section.iconSection:
       const icons = get(data, 'icons', [])
       return {
-        section: type, 
-        data: mapToIconServiceArray(icons)
+        section: type,
+        data: [],
+        icons: mapToIconServiceArray(icons)
       }
     case section.subBannerSection:
       const subBanners = get(data, 'subbanners', [])
       return {
         section: type,
-        data: mapToBannerArray(subBanners)
+        data: [],
+        subbanners: mapToBannerArray(subBanners)
       }
     case section.flashSaleSection:
       return {
         section: type,
+        link: get(data, 'link') || '',
         data: get(data, 'items') || []
+      }
+    case section.eventHubSection:
+      return {
+        section: type,
+        data: [],
+        event: data
+      }
+    case section.foodFeedSection:
+      return {
+        section: type,
+        data: [],
+        feed: get(data, 'foodFeed')
+      }
+    case section.promotion:
+      return {
+        section: type,
+        data: [],
+        coupon: get(data, 'coupon')
+      }
+    case section.collectionSection:
+      return {
+        section: type,
+        link: get(data, 'link') || '',
+        data: get(data, 'items') || []
+      }
+    case section.reorderSection:
+      return {
+        section: type,
+        orders: data,
+        data: []
+      }
+    case section.favoriteSection:
+      return {
+        section: type,
+        merchants: data,
+        data: []
+      }
+    case section.merchantSection:
+      return {
+        section: type,
+        data: get(data, 'docs') || [],
+        ...pick(data, ['pages', 'page', 'limit', 'total'])
       }
     default:
       return null

@@ -5,7 +5,7 @@ import * as RNLocalize from 'react-native-localize';
 import I18n from 'i18n-js';
 
 import en from '@/assets/translate/en.json'
-import vi from '@/assets/translate/en.json'
+import vi from '@/assets/translate/vi.json'
 
 const locales = RNLocalize.getLocales();
 

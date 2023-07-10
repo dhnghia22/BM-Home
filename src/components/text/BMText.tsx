@@ -3,6 +3,7 @@ import { IBMFontStyle, fontSize } from '@/constants/font-size'
 import fonts from '@/assets/fonts'
 import * as React from 'react'
 import { Text, TextProps } from 'react-native'
+import useColors from '@/hooks/use-colors'
 
 interface IBMTextProps extends TextProps {
   color?: string
@@ -19,9 +20,11 @@ const IBMText: React.FC<IBMTextProps> = ({
   children,
   ...props
 }) => {
+  const colors = useColors()
   const defaultFontFamily = fontFamily || fonts?.roboto?.regular
-  const defaultColor = Colors.light.black
+  const defaultColor = colors.black
   const defaultFontStyle = fontSize.title4
+
 
   const textStyles = {
     fontFamily: defaultFontFamily,

@@ -1,8 +1,14 @@
 {
-    "home_screen": {
-        "search_placeholder": "Search for a restaurant or menu"
-    },
-    "error": {
-        "something_went_wrong": "Something went wrong, please try again!"
-    }
+  "home_screen": {
+    "search_placeholder": "Search for a restaurant or menu",
+    "food_blog": "Food blog",
+    "coupon_desc": "Please check your {{count}} coupons!",
+    "explorer_now": "Explorer now",
+    "reorder_title": "Maybe you  want to try again?",
+    "last_order": "Last ordered",
+    "restaurants_near_you": "Restaurants near you"
+  },
+  "error": {
+    "something_went_wrong": "Something went wrong, please try again!"
+  }
 }

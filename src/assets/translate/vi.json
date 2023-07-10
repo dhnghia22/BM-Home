@@ -1,8 +1,14 @@
 {
-    "home_screen": {
-        "search_placeholder": "Tìm kiếm nhà hàng, món ăn"
-    },
-    "error": {
-        "something_went_wrong": "Có lỗi xảy ra, vui lòng thử lại!"
-    }
+  "home_screen": {
+    "search_placeholder": "Tìm kiếm nhà hàng, món ăn",
+    "food_blog": "Blog bàn ăn",
+    "coupon_desc": "Hãy kiểm tra {{count}} ưu đãi của bạn!",
+    "explorer_now": "Khám phá ngay",
+    "reorder_title": "Có lẽ bạn muốn thử lại?",
+    "last_order": "Đơn hàng cuối",
+    "restaurants_near_you": "Nhà hàng gần bạn"
+  },
+  "error": {
+    "something_went_wrong": "Có lỗi xảy ra, vui lòng thử lại!"
+  }
 }

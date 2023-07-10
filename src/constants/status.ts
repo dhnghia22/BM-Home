@@ -2,5 +2,6 @@ export enum API_STATUS {
     DEFAULT = "DEFAULT",
     LOADING = "LOADING",
     SUCCESS = "SUCCESS",
+    MORE_LOADING = "MORE_LOADING",
     ERROR = "ERROR",
   }
