@@ -48,7 +48,6 @@ export function fetchMoreHomeData(page: number): ActionType {
 }
 
 export function setError(message: string): ActionType {
-  console.log(message)
   return {
     type: HOME_SET_ERROR,
     payload: message

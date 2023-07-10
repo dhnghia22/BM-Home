@@ -26,7 +26,6 @@ export class ApiClientService implements IApiRequester {
     url: string,
     config?: CustomAxiosRequestConfig
   ): Promise<T> {
-    console.log('sdaasdadas ', this.apiClient)
     return this.apiClient.get(url, config)
   }
   post<T>(

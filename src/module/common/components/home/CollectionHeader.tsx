@@ -43,7 +43,6 @@ const CollectionHeaderFlashSaleMerchant: React.FC<ICollectionHeaderMerchant> =
     const colors = useColors()
     const styles = useMemo(() => createStyle(colors), [colors])
 
-
     return (
       <View style={styles.container}>
         <Row>
